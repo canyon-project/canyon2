@@ -2,7 +2,7 @@ import { codeToHtml } from 'shiki'
 import {useState} from "react";
 import ss from '../mock/fileContent.json'
 import cov from '../mock/fileCoverage.json'
-import {gendecorations, genFnDecorations} from "../helpers/gendecorations.ts";
+import {genBranchdecorations, gendecorations, genFnDecorations} from "../helpers/gendecorations.ts";
 
 // 用于文件base64解码后的格式化
 export function getDecode(str: string) {
@@ -25,7 +25,7 @@ console.log(cov,'cov')
 
 // const decorations = gendecorations(cov["src/module/bookPage/PostApprovalAndTravelApplication/index.ts"],h)
 
-const decorations = genFnDecorations(cov["src/module/bookPage/PostApprovalAndTravelApplication/index.ts"],h)
+const decorations = genBranchdecorations(cov["src/module/bookPage/PostApprovalAndTravelApplication/index.ts"],h)
 console.log(decorations)
 const Xxx = () => {
   const [html, setHtml] = useState('')

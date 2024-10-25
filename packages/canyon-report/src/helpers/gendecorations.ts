@@ -1,6 +1,8 @@
 // 忽略ts
 // ts-ignore
 
+import {make2DArrayNonOverlapping} from "./test.ts";
+
 function fffffffff(startLine, endLine, structuredText, startCol, endCol) {
     let start = 0;
     let end = 0;
@@ -109,3 +111,85 @@ export const genFnDecorations = (filecoverage,fileContent) => {
 }
 
 
+
+
+export const genBranchdecorations = (fileCoverage,fileContent) => {
+
+  // const statementStats = filecoverage.b;
+  // const statementMeta = filecoverage.branchMap;
+
+  const branchStats = fileCoverage.b;
+  const branchMeta = fileCoverage.branchMap;
+
+  const structuredText = fileContent
+    .split("\n")
+    .reduce((previousValue, currentValue, currentIndex) => {
+      return {
+        ...previousValue,
+        [currentIndex]: currentValue,
+      };
+    }, {});
+
+  if (!branchStats) {
+    return;
+  }
+
+
+  const statementDecorations = [];
+
+  Object.entries(branchStats).forEach(([branchName, branchArray]) => {
+    // const sumCount = branchArray.
+    const metaArray = branchMeta[branchName].locations;
+
+
+
+    // console.log(metaArray,branchArray)
+
+    for (let i = 0; i < branchArray.length; i++) {
+      if (branchArray[i]===0) {
+        const meta = metaArray[i];
+        // console.log(branchMeta[branchName])
+
+        const leixing = branchMeta[branchName].type
+
+        if (leixing === 'if' && i===0){
+
+        } else {
+
+          const startCol = meta.start.column;
+          let endCol = meta.end.column + 1;
+          const startLine = meta.start.line;
+          const endLine = meta.end.line;
+
+          // const startCol = meta.start.column;
+          // let endCol = startCol + 1;
+          // const startLine = meta.start.line;
+          // const endLine = startLine;
+
+          if (structuredText[startLine]) {
+            statementDecorations.push(fffffffff(startLine, endLine, structuredText, startCol, endCol));
+          }
+        }
+
+      }
+    }
+
+    // let i;
+    // let count;
+    // let meta;
+    // let startCol;
+    // let endCol;
+    // let startLine;
+    // let endLine;
+    // let openSpan;
+    // let closeSpan;
+    // let text;
+  })
+
+  // console.log(statementStats,statementMeta)
+
+
+
+  console.log(statementDecorations,'statementDecorations')
+  return make2DArrayNonOverlapping(statementDecorations)
+}
