@@ -1,29 +1,12 @@
-# Rsbuild Project
+```shell
+入参，content，coverage
 
-## Setup
 
-Install the dependencies:
+返回值，装饰数组。
 
-```bash
-pnpm install
-```
 
-## Get Started
+rust包
 
-Start the dev server:
 
-```bash
-pnpm dev
-```
-
-Build the app for production:
-
-```bash
-pnpm build
-```
-
-Preview the production build locally:
-
-```bash
-pnpm preview
+优先级
 ```
